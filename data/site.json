@@ -6,12 +6,12 @@
   "show_group_leaders": false,
   "nav": [
     { "label": "Home", "href": "/" },
-    { "label": "Meeting Schedule", "href": "/schedule.html" },
-    { "label": "Overview of ARP", "href": "/overview.html" },
-    { "label": "What to Expect", "href": "/what-to-expect.html" },
-    { "label": "Resources", "href": "/resources.html" },
-    { "label": "Contact", "href": "/contact.html" },
-    { "label": "About", "href": "/about.html" }
+    { "label": "Meeting Schedule", "href": "/schedule" },
+    { "label": "Overview of ARP", "href": "/overview" },
+    { "label": "What to Expect", "href": "/what-to-expect" },
+    { "label": "Resources", "href": "/resources" },
+    { "label": "Contact", "href": "/contact" },
+    { "label": "About", "href": "/about" }
   ],
   "church_links": [
     { "label": "Listen to a Meeting", "href": "https://www.churchofjesuschrist.org/media/collection/addiction-recovery-program-audio-series?lang=eng" },
