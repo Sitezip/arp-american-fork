@@ -125,9 +125,8 @@
         '<li class="' + (m.format === "zoom" ? "fmt-zoom" : "") + '">' + (m.format === "zoom" ? "Zoom / phone" : "In person") + "</li></ul>";
       var body = "";
       if (m.format === "zoom") {
-        body += '<div class="btn-row"><a class="btn" href="' + esc(m.zoom_url) + '" target="_blank" rel="noopener">Join on Zoom</a>' +
-          (m.phone ? '<a class="btn secondary" href="tel:' + esc(m.phone.replace(/[^\d]/g, "")) + '">Call in: ' + esc(m.phone) + "</a>" : "") + "</div>" +
-          '<p class="zoom-details">Meeting ID <code>' + esc(m.meeting_id) + "</code> · Passcode <code>" + esc(m.passcode) + "</code></p>";
+        // Zoom codes are never published; details are shared on request.
+        body += '<p class="zoom-details">Zoom details are shared on request. <a href="/contact">Contact a coordinator</a>.</p>';
       } else {
         body += '<p class="where">' + esc(m.location) + "</p>" +
           '<div class="btn-row"><a class="btn secondary" href="' + esc(m.map_url) + '" target="_blank" rel="noopener" aria-label="Map: ' + esc(m.location) + '">Open in Google Maps</a></div>';

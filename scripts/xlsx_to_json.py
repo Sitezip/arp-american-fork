@@ -16,7 +16,8 @@ What it does
   written in "time"; a parsed 24h "time_sort" is added only for sorting.
 - The schedule date is taken from the first date-valued cell in the sheet
   (the spreadsheet keeps it in the top-right of the first header row).
-- The Zoom dial-in number is read from the sheet text ("call 253-...").
+- Zoom join links, meeting IDs, passcodes, and the call-in number are NEVER
+  written to the output (they are shared on request by a coordinator).
 
 Review the diff of data/meetings.json before committing.
 """
@@ -77,15 +78,11 @@ def main():
         sys.exit("Refusing to read a 'With Facilitators' sheet (contains participant names).")
 
     rows = [[c.value for c in r] for r in ws.iter_rows(max_col=10)]
-    updated, phone = None, ""
+    updated = None
     for r in rows:
         for v in r:
             if updated is None and isinstance(v, dt.datetime):
                 updated = v.date().isoformat()
-            if isinstance(v, str) and not phone:
-                m = re.search(r"call\s+([\d\-\(\) ]{10,})", v, re.I)
-                if m:
-                    phone = m.group(1).strip()
 
     meetings, section, is_zoom, seen = [], "", False, {}
     for r in rows:
@@ -115,7 +112,9 @@ def main():
             "city": city,
         }
         if is_zoom:
-            m.update({"zoom_url": e, "meeting_id": g, "passcode": h, "phone": phone, "location": ""})
+            # NEVER publish Zoom join links, meeting IDs, passcodes, or call-in details.
+            # They are shared on request by a coordinator. Columns E/G/H are deliberately ignored.
+            m.update({"location": "", "zoom_details": "on-request"})
         else:
             q = e if (any(x.lower() in e.lower() for x in CITIES) or not city) else f"{e}, {city}"
             if "ut" not in q.lower().split(", ")[-1].split():
@@ -134,10 +133,12 @@ def main():
         "source_file": Path(a.xlsx).name,
         "source_sheet": ws.title,
         "schedule_updated": updated or dt.date.today().isoformat(),
-        "zoom_phone": phone,
         "count": len(meetings),
         "meetings": meetings,
     }
+    text = json.dumps(out)
+    if re.search(r"zoom\.us/|pwd=|\bpasscode\b|meeting_id|\d{9,11}", text, re.I):
+        sys.exit("Safety check failed: output looks like it contains Zoom codes. Nothing written.")
     Path(a.out).write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
     print(f"Wrote {len(meetings)} meetings to {a.out} (schedule date {out['schedule_updated']})")
 

@@ -10,7 +10,6 @@ Rule of thumb: **edit data files, not code.** All JSON must stay valid. Run
 |---|---|---|
 | Meeting schedule (all meetings) | `data/meetings.json` | Generated from the spreadsheet; see below. |
 | "Schedule last updated" date | `data/meetings.json` → `schedule_updated` (YYYY-MM-DD) | The script takes it from the date cell in the spreadsheet. |
-| Zoom call-in phone number | `data/meetings.json` → `zoom_phone` and each Zoom meeting's `phone` | |
 | Notes on a meeting (e.g. "No meeting on holidays") | `data/meetings.json` → that meeting's `notes` | Shown under the meeting. Re-running the script clears notes, so re-add them. |
 | Show/hide group leader names on the schedule | `data/site.json` → `show_group_leaders` (true/false) | Off by default. |
 | Announcement banner (all pages) | `data/site.json` → `announcement` | Use `""` for no banner. Example: `"No meetings Thursday, Nov 26 (Thanksgiving)."` |
@@ -24,6 +23,14 @@ Rule of thumb: **edit data files, not code.** All JSON must stay valid. Run
 | Contact page intro | `contact.html` | Cards themselves come from `data/contacts.json`. |
 | Styles | `assets/css/site.css` | |
 | Header/footer/schedule/contact/resource rendering | `assets/js/site.js` | Code; change only when needed. |
+
+## Zoom codes are never published
+
+Do **not** put Zoom join links, meeting IDs, passcodes, or call-in numbers on the site. That covers
+the data files, the page text, and these docs. Zoom meetings show day, time, type, and notes, plus
+"Zoom details are shared on request. Contact a coordinator." Coordinators send the codes as needed.
+`scripts/xlsx_to_json.py` drops those spreadsheet columns, and it refuses to write output that
+looks like it contains codes.
 
 ## Updating the schedule from the spreadsheet
 
@@ -52,7 +59,7 @@ Each meeting in `data/meetings.json` looks like this:
   "time_sort": "12:00",                 // 24h, for sorting only
   "location": "240 S Center St, American Fork",
   "map_url": "https://www.google.com/maps/search/?api=1&query=...",
-  "zoom_url": "", "meeting_id": "", "passcode": "", "phone": "",   // Zoom meetings only
+  "zoom_details": "on-request",       // Zoom meetings only; no codes, ever
   "group_leaders": "Swasey/Tucker",
   "notes": "",
   "id": "monday-12-00-american-fork-general-addiction-men-women"
