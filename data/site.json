@@ -1,0 +1,24 @@
+{
+  "_comment": "Site-wide settings: name, navigation, announcement banner, footer. See CONTENT-EDITING.md.",
+  "site_name": "ARP Recovery in American Fork",
+  "tagline": "Healing through the Savior: Addiction Recovery Program meetings in the American Fork area",
+  "announcement": "",
+  "show_group_leaders": false,
+  "nav": [
+    { "label": "Home", "href": "/" },
+    { "label": "Meeting Schedule", "href": "/schedule.html" },
+    { "label": "Overview of ARP", "href": "/overview.html" },
+    { "label": "What to Expect", "href": "/what-to-expect.html" },
+    { "label": "Resources", "href": "/resources.html" },
+    { "label": "Contact", "href": "/contact.html" },
+    { "label": "About", "href": "/about.html" }
+  ],
+  "church_links": [
+    { "label": "Listen to a Meeting", "href": "https://www.churchofjesuschrist.org/media/collection/addiction-recovery-program-audio-series?lang=eng" },
+    { "label": "Help for Spouses and Families", "href": "https://addictionrecovery.churchofjesuschrist.org/spouses-and-families?lang=eng" },
+    { "label": "Help for Individuals", "href": "https://addictionrecovery.churchofjesuschrist.org/individuals?lang=eng" }
+  ],
+  "official_site": "https://addictionrecovery.churchofjesuschrist.org/",
+  "footer_note": "This is a local page created by the American Fork Mission Addiction Recovery Program service missionaries to support Healing through the Savior: The Addiction Recovery Program of The Church of Jesus Christ of Latter-day Saints. It is not an official website of the Church. For official information and meetings worldwide, visit addictionrecovery.churchofjesuschrist.org.",
+  "media_credit": "Video images © by Intellectual Reserve, Inc. Used from the Church's Gospel Media Library under its terms for Church-related, noncommercial use; each image links back to its source."
+}

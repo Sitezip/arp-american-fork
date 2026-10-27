@@ -1,0 +1,23 @@
+{
+  "_comment": "Contact cards on contact.html. Leave a field as \"\" to show 'coming soon'. Only publish details the person has approved. See CONTENT-EDITING.md.",
+  "contacts": [
+    {
+      "names": "Elder & Sister Olsen",
+      "role": "Program Coordinators",
+      "people": [
+        { "label": "Elder Olsen", "phone": "801-671-7369" },
+        { "label": "Sister Olsen", "phone": "801-473-0179" }
+      ],
+      "email": "arpolsens@gmail.com"
+    },
+    {
+      "names": "Elder & Sister Kallas",
+      "role": "Facilitator Coordinators",
+      "people": [
+        { "label": "Elder Kallas", "phone": "" },
+        { "label": "Sister Kallas", "phone": "" }
+      ],
+      "email": ""
+    }
+  ]
+}

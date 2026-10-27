@@ -1,0 +1,55 @@
+{
+  "_comment": "Links on resources.html (and the home page quick links). All are official Church pages, checked 2026-10-27. See CONTENT-EDITING.md.",
+  "groups": [
+    {
+      "id": "listen",
+      "title": "Listen to a Meeting",
+      "intro": "Hear recordings of real recovery meetings to get a feel for what a meeting is like.",
+      "links": [
+        { "label": "Listen to Recovery Meeting podcasts", "href": "https://www.churchofjesuschrist.org/media/collection/addiction-recovery-program-audio-series?lang=eng" },
+        { "label": "Listen to Spouse and Family Support Meeting podcasts", "href": "https://www.churchofjesuschrist.org/media/collection/womens-spouse-and-family-support-meeting-podcast?lang=eng" }
+      ]
+    },
+    {
+      "id": "individuals",
+      "title": "Help for Individuals",
+      "intro": "For anyone seeking recovery from addiction or compulsive behavior.",
+      "links": [
+        { "label": "Help for Individuals (official ARP site)", "href": "https://addictionrecovery.churchofjesuschrist.org/individuals?lang=eng" },
+        { "label": "What is the Addiction Recovery Program?", "href": "https://addictionrecovery.churchofjesuschrist.org/what-is-an-addiction-recovery-support-group?lang=eng" },
+        { "label": "What can I expect from a recovery group?", "href": "https://addictionrecovery.churchofjesuschrist.org/what-can-i-expect-from-a-recovery-support-group?lang=eng" },
+        { "label": "Read the Healing through the Savior 12-step guide online", "href": "https://www.churchofjesuschrist.org/study/manual/addiction-recovery-program-2023?lang=eng" },
+        { "label": "Download the 12-step guide", "href": "https://addictionrecovery.churchofjesuschrist.org/addiction-recovery-program-guide?lang=eng" },
+        { "label": "Support in Recovery", "href": "https://addictionrecovery.churchofjesuschrist.org/support-in-recovery?lang=eng" },
+        { "label": "Choosing a Sponsor", "href": "https://addictionrecovery.churchofjesuschrist.org/choosing-a-sponsor?lang=eng" },
+        { "label": "12 Steps to Change videos", "href": "https://www.churchofjesuschrist.org/inspiration/latter-day-saints-channel/watch/collection/12-steps-to-change?lang=eng" }
+      ]
+    },
+    {
+      "id": "families",
+      "title": "Help for Spouses and Families",
+      "intro": "Support for spouses, parents, and family members of those struggling with addiction.",
+      "links": [
+        { "label": "Help for Spouses and Families (official ARP site)", "href": "https://addictionrecovery.churchofjesuschrist.org/spouses-and-families?lang=eng" },
+        { "label": "What is a Spouse and Family Support Group?", "href": "https://addictionrecovery.churchofjesuschrist.org/what-is-the-spouse-and-family-support-program?lang=eng" },
+        { "label": "Read the Support Guide online", "href": "https://www.churchofjesuschrist.org/study/manual/support-guide-help-for-spouses-and-family-of-those-in-recovery/introduction?lang=eng" },
+        { "label": "Download the Support Guide", "href": "https://addictionrecovery.churchofjesuschrist.org/support-guide-help-for-spouses-and-family-of-those-in-recovery?lang=eng" }
+      ]
+    },
+    {
+      "id": "find",
+      "title": "Find a Meeting Anywhere",
+      "intro": "Search official in-person, phone, and video meetings worldwide.",
+      "links": [
+        { "label": "Official ARP meeting finder", "href": "https://addictionrecovery.churchofjesuschrist.org/" },
+        { "label": "More addiction recovery videos", "href": "https://www.churchofjesuschrist.org/media/collection/addiction-video-collection?lang=eng" }
+      ]
+    }
+  ],
+  "videos": [
+    { "title": "What to Expect at a 12 Step Recovery Meeting", "href": "https://www.churchofjesuschrist.org/media/video/2012-12-0021-what-to-expect-at-a-12-step-recovery-meeting?lang=eng", "image": "/assets/img/what-to-expect.webp", "alt": "A small group of adults seated in a circle in a church classroom, holding recovery guides" },
+    { "title": "What is the 12 Step Program?", "href": "https://www.churchofjesuschrist.org/media/video/2012-12-0020-what-is-the-12-step-program?lang=eng", "image": "/assets/img/what-is-12-step.webp", "alt": "Sketched illustration of a man sitting alone on the floor with his arms around his knees" },
+    { "title": "Step Two: Hope", "href": "https://www.churchofjesuschrist.org/media/video/2012-12-0002-step-two-hope?lang=eng", "image": "/assets/img/step-two-hope.webp", "alt": "A man seated at a table with a notebook, listening during a recovery meeting" },
+    { "title": "What is the Spouse and Family Support Program?", "href": "https://www.churchofjesuschrist.org/media/video/2012-12-0023-what-is-the-spouse-and-family-support-program?lang=eng", "image": "/assets/img/spouse-family.webp", "alt": "A thoughtful man in a blue shirt listening to someone across from him" }
+  ]
+}
