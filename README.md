@@ -10,7 +10,7 @@ Latter-day Saints. It is a local page, not an official Church site.
 - Schedule source: Elder Randy Olsen's live Google Sheet **"Meeting Schedule - AF ARP 10-5-26.xlsx"**
   (Drive file id `1Pi_yt9pXG-EfyyaJhMvBVvvCg03-QfiO`, owner randyolsen777@gmail.com), "Regular" tab only.
   The earlier temporary copy (shared by jwarner7) is retired and no longer used.
-- Schedule refresh: `python3 scripts/xlsx_to_json.py "Meeting Schedule - AF ARP 10-5-26.xlsx"`
+- Schedule refresh: `python3 scripts/xlsx_to_json.py "Meeting Schedule - AF ARP 10-5-26.xlsx" --updated <Drive modifiedTime>`
 
 Pages: Home, Meeting Schedule, Overview of ARP, What to Expect, Resources (Listen to a Meeting,
 Help for Individuals, Help for Spouses and Families), Contact, About.

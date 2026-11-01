@@ -9,7 +9,7 @@ Rule of thumb: **edit data files, not code.** All JSON must stay valid. Run
 | What | Where | Notes |
 |---|---|---|
 | Meeting schedule (all meetings) | `data/meetings.json` | Generated from the spreadsheet; see below. |
-| "Schedule last updated" date | `data/meetings.json` → `schedule_updated` (YYYY-MM-DD) | The script takes it from the date cell in the spreadsheet. |
+| "Schedule last updated" date | `data/meetings.json` → `schedule_updated` (YYYY-MM-DD) | The Drive file's **modifiedTime**, converted to America/Denver (pass it with `--updated`). Not the date typed inside the sheet. |
 | Notes on a meeting (e.g. "No meeting on holidays") | `data/meetings.json` → that meeting's `notes` | Shown under the meeting. Re-running the script clears notes, so re-add them. |
 | Show/hide group leader names on the schedule | `data/site.json` → `show_group_leaders` (true/false) | Off by default. |
 | Announcement banner (all pages) | `data/site.json` → `announcement` | Use `""` for no banner. Example: `"No meetings Thursday, Nov 26 (Thanksgiving)."` |
@@ -41,12 +41,17 @@ The temporary copy shared earlier by jwarner7 is retired; do not use it. Never u
 
 1. Download the live spreadsheet above as .xlsx from Google Drive.
 2. `pip install openpyxl` (once)
-3. `python3 scripts/xlsx_to_json.py "Meeting Schedule - AF ARP 10-5-26.xlsx"`
-4. Review `git diff data/meetings.json`. Check the count and any changed times/addresses. Then commit and push.
+3. Note the file's Drive **modifiedTime** (Drive file metadata, e.g. `2026-10-30T16:50:55Z`).
+4. `python3 scripts/xlsx_to_json.py "Meeting Schedule - AF ARP 10-5-26.xlsx" --updated 2026-10-30T16:50:55Z`
+   (use the real modifiedTime; the script converts it to the America/Denver date shown as
+   "Schedule last updated". A plain `YYYY-MM-DD` Denver date also works.)
+5. Review `git diff data/meetings.json`. Check the count and any changed times/addresses. Then commit and push.
 
 The script reads only the **"Regular"** sheet (or the first sheet). It refuses a "With Facilitators"
 sheet, because that sheet lists participant first names that must never be published. Values are
-copied as written. Map links get the city from the meeting name if the address has no city, plus ", UT".
+copied as written, except confirmed fixes in `LOCATION_OVERRIDES` at the top of the script
+(currently: "580 N. Caveman Blvd." → "580 N. Caveman Blvd. American Fork, UT", city confirmed by
+Jake 2026-10-31). Add an entry there for any other confirmed fix so weekly syncs keep it. Map links get the city from the meeting name if the address has no city, plus ", UT".
 
 ## Editing one meeting by hand
 

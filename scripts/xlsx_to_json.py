@@ -8,7 +8,13 @@ Never use the old "American Fork ARP Meeting Schedule" PDF.
 
 Usage:
     pip install openpyxl
-    python3 scripts/xlsx_to_json.py "Meeting Schedule - AF ARP 10-5-26.xlsx" [--sheet Regular] [--out data/meetings.json]
+    python3 scripts/xlsx_to_json.py "Meeting Schedule - AF ARP 10-5-26.xlsx" \
+        --updated 2026-10-30T16:50:55Z [--sheet Regular] [--out data/meetings.json]
+
+    --updated is the Drive file's modifiedTime (RFC 3339, e.g. 2026-10-30T16:50:55Z), which
+    is converted to America/Denver; a plain YYYY-MM-DD (already a Denver date) also works.
+    Always pass it: the site's "Schedule last updated" date must be the Drive modified date,
+    not the date typed inside the sheet.
 
 What it does
 - Reads ONE sheet (default "Regular", else the first sheet). It never reads the
@@ -19,14 +25,18 @@ What it does
 - Every row under a section whose Day column is a weekday becomes a meeting.
 - Values are copied as written (whitespace tidied only). Times are kept as
   written in "time"; a parsed 24h "time_sort" is added only for sorting.
-- The schedule date is taken from the first date-valued cell in the sheet
-  (the spreadsheet keeps it in the top-right of the first header row).
+- The schedule date ("Schedule last updated") comes from --updated, i.e. the Drive
+  file's modifiedTime converted to America/Denver. Only if --updated is missing does it
+  fall back to the first date cell inside the sheet, with a warning.
+- LOCATION_OVERRIDES fills in details the sheet leaves out (e.g. a missing city) that a
+  coordinator has confirmed. Overrides apply only when the sheet value matches exactly.
 - Zoom join links, meeting IDs, passcodes, and the call-in number are NEVER
   written to the output (they are shared on request by a coordinator).
 
 Review the diff of data/meetings.json before committing.
 """
 import argparse, datetime as dt, json, re, sys, urllib.parse
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 try:
@@ -35,6 +45,13 @@ except ImportError:
     sys.exit("Please install openpyxl: pip install openpyxl")
 
 DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+# Confirmed additions to sheet values. Key = exact (whitespace-tidied) value in the sheet.
+# Applied only on an exact match, so if the sheet is corrected the override simply stops applying.
+LOCATION_OVERRIDES = {
+    # City confirmed by Jake Graff, 2026-10-31.
+    "580 N. Caveman Blvd.": "580 N. Caveman Blvd. American Fork, UT",
+}
+
 CITIES = ["American Fork", "Pleasant Grove", "Cedar Hills", "Highland", "Lehi", "Alpine", "Saratoga Springs"]
 
 
@@ -66,6 +83,17 @@ def time_sort(raw):
     return f"{h:02d}:{mnt:02d}"
 
 
+def parse_updated(s):
+    """Drive modifiedTime (RFC 3339) -> America/Denver date (YYYY-MM-DD). Plain dates pass through."""
+    s = s.strip()
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", s):
+        return dt.date.fromisoformat(s).isoformat()
+    t = dt.datetime.fromisoformat(s.replace("Z", "+00:00"))
+    if t.tzinfo is None:
+        sys.exit("--updated timestamp needs a zone (e.g. ...Z). Use the Drive modifiedTime as given.")
+    return t.astimezone(ZoneInfo("America/Denver")).date().isoformat()
+
+
 def slug(s):
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
@@ -73,6 +101,7 @@ def slug(s):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("xlsx")
+    ap.add_argument("--updated", help="Drive modifiedTime of the spreadsheet (e.g. 2026-10-30T16:50:55Z) or YYYY-MM-DD in America/Denver")
     ap.add_argument("--sheet", default="Regular")
     ap.add_argument("--out", default=str(Path(__file__).resolve().parent.parent / "data" / "meetings.json"))
     a = ap.parse_args()
@@ -88,6 +117,12 @@ def main():
         for v in r:
             if updated is None and isinstance(v, dt.datetime):
                 updated = v.date().isoformat()
+
+    if a.updated:
+        updated = parse_updated(a.updated)
+    else:
+        print("WARNING: --updated not given; using the date typed inside the sheet. "
+              "Pass the Drive modifiedTime instead.", file=sys.stderr)
 
     meetings, section, is_zoom, seen = [], "", False, {}
     for r in rows:
@@ -121,6 +156,7 @@ def main():
             # They are shared on request by a coordinator. Columns E/G/H are deliberately ignored.
             m.update({"location": "", "zoom_details": "on-request"})
         else:
+            e = LOCATION_OVERRIDES.get(e, e)
             q = e if (any(x.lower() in e.lower() for x in CITIES) or not city) else f"{e}, {city}"
             if "ut" not in q.lower().split(", ")[-1].split():
                 q += ", UT"
