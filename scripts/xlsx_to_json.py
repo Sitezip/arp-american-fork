@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """Convert the AF ARP meeting schedule spreadsheet into data/meetings.json.
 
+Source of truth: Elder Randy Olsen's live Google Sheet
+"Meeting Schedule - AF ARP 10-5-26.xlsx" (Drive file id 1Pi_yt9pXG-EfyyaJhMvBVvvCg03-QfiO,
+owner randyolsen777@gmail.com). The earlier temporary copy shared by jwarner7 is retired.
+Never use the old "American Fork ARP Meeting Schedule" PDF.
+
 Usage:
     pip install openpyxl
-    python3 scripts/xlsx_to_json.py "Meeting Schedule - AF.xlsx" [--sheet Regular] [--out data/meetings.json]
+    python3 scripts/xlsx_to_json.py "Meeting Schedule - AF ARP 10-5-26.xlsx" [--sheet Regular] [--out data/meetings.json]
 
 What it does
 - Reads ONE sheet (default "Regular", else the first sheet). It never reads the

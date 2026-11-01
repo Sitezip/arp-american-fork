@@ -34,9 +34,14 @@ looks like it contains codes.
 
 ## Updating the schedule from the spreadsheet
 
-1. Download the latest schedule spreadsheet (.xlsx) from Google Drive.
+**Source of truth:** Elder Randy Olsen's live spreadsheet **"Meeting Schedule - AF ARP 10-5-26.xlsx"**
+(Google Drive file id `1Pi_yt9pXG-EfyyaJhMvBVvvCg03-QfiO`, owner randyolsen777@gmail.com).
+The temporary copy shared earlier by jwarner7 is retired; do not use it. Never use the old
+"American Fork ARP Meeting Schedule" PDF.
+
+1. Download the live spreadsheet above as .xlsx from Google Drive.
 2. `pip install openpyxl` (once)
-3. `python3 scripts/xlsx_to_json.py "Meeting Schedule - AF.xlsx"`
+3. `python3 scripts/xlsx_to_json.py "Meeting Schedule - AF ARP 10-5-26.xlsx"`
 4. Review `git diff data/meetings.json`. Check the count and any changed times/addresses. Then commit and push.
 
 The script reads only the **"Regular"** sheet (or the first sheet). It refuses a "With Facilitators"
