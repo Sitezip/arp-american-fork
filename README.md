@@ -4,7 +4,8 @@ Website for the American Fork Mission Addiction Recovery Program (ARP) meetings.
 *Healing through the Savior: The Addiction Recovery Program* of The Church of Jesus Christ of
 Latter-day Saints. It is a local page, not an official Church site.
 
-- Live: https://arp-american-fork.pages.dev/ (Cloudflare Pages; auto-deploys from `main`)
+- Live: https://healinginaf.com/ (Cloudflare Pages project `arp-american-fork`; auto-deploys from `main`).
+  `www.healinginaf.com` 301-redirects to the apex; https://arp-american-fork.pages.dev/ also still serves the site.
 - Static HTML/CSS/JS, no build step, no tracking.
 - Content lives in `data/*.json` and the marked sections of each page. See **CONTENT-EDITING.md**.
 - Schedule source: Elder Randy Olsen's live Google Sheet **"Meeting Schedule - AF ARP 10-5-26.xlsx"**

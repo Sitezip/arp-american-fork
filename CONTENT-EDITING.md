@@ -1,7 +1,7 @@
 # Content editing guide
 
 Plain static site: HTML + one CSS file + one small JS file. **No build step.** Cloudflare Pages
-deploys every push to `main` to https://arp-american-fork.pages.dev/ (about 1 minute).
+deploys every push to `main` to https://healinginaf.com/ (about 1 minute).
 
 Rule of thumb: **edit data files, not code.** All JSON must stay valid. Run
 `python3 -m json.tool data/<file>.json` before committing.
