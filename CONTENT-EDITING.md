@@ -14,7 +14,7 @@ Rule of thumb: **edit data files, not code.** All JSON must stay valid. Run
 | Show/hide group leader names on the schedule | `data/site.json` → `show_group_leaders` (true/false) | Off by default. |
 | Announcement banner (all pages) | `data/site.json` → `announcement` | Use `""` for no banner. Example: `"No meetings Thursday, Nov 26 (Thanksgiving)."` |
 | Site name, menu, footer, Church links in the menu | `data/site.json` | `church_links` = Listen to a Meeting / Help for Spouses and Families / Help for Individuals. |
-| Contact cards (Olsens, Kallases) | `data/contacts.json` | Blank `phone`/`email` shows "coming soon". Only publish details the person approved. |
+| Contact cards (Olsens, Kallases) | `data/contacts.json` | Blank `phone` shows "coming soon". Leave `email` blank to hide the email row. Only publish details the person approved. |
 | Resource links and video cards | `data/resources.json` | Official Church URLs only. Video images live in `assets/img/`. |
 | Home page text | `index.html` | Between `EDITABLE PAGE CONTENT START/END` comments. |
 | Overview of ARP | `overview.html` | From Elder Olsen's **Addiction Recovery Program Overview.docx** (emailed 2026-10-26). |

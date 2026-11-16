@@ -188,9 +188,10 @@
           ? '<a href="tel:' + esc(p.phone.replace(/[^\d+]/g, "")) + '">' + esc(p.phone) + "</a>"
           : '<span class="placeholder">Phone coming soon</span>') + "</dd>";
       }).join("");
-      rows += "<dt>Email</dt><dd>" + (c.email
-        ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + "</a>"
-        : '<span class="placeholder">Email coming soon</span>') + "</dd>";
+      if (c.email) {
+        rows += "<dt>Email</dt><dd>" +
+          '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + "</a></dd>";
+      }
       return '<article class="card contact-card"><h2 style="margin-top:0">' + esc(c.names) + '</h2><p class="muted" style="margin:0">' +
         esc(c.role) + "</p><dl>" + rows + "</dl></article>";
     }).join("");
