@@ -48,10 +48,11 @@ The temporary copy shared earlier by jwarner7 is retired; do not use it. Never u
 5. Review `git diff data/meetings.json`. Check the count and any changed times/addresses. Then commit and push.
 
 The script reads only the **"Regular"** sheet (or the first sheet). It refuses a "With Facilitators"
-sheet, because that sheet lists participant first names that must never be published. Values are
-copied as written, except confirmed fixes in `LOCATION_OVERRIDES` at the top of the script
-(currently: "580 N. Caveman Blvd." → "580 N. Caveman Blvd. American Fork, UT", city confirmed by
-Jake 2026-10-31). Add an entry there for any other confirmed fix so weekly syncs keep it. Map links get the city from the meeting name if the address has no city, plus ", UT".
+sheet, because that sheet lists participant first names that must never be published. Addresses and
+other values are copied from the sheet exactly as written (whitespace tidied only). Do not correct
+or complete addresses in the script or in `meetings.json`; any change must be made in the
+spreadsheet itself. Map links may still append the city from the meeting name if the address has
+no city, plus ", UT", so the pin can be found—this does not change the published address text.
 
 ## Editing one meeting by hand
 

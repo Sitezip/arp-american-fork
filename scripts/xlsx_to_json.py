@@ -28,8 +28,9 @@ What it does
 - The schedule date ("Schedule last updated") comes from --updated, i.e. the Drive
   file's modifiedTime converted to America/Denver. Only if --updated is missing does it
   fall back to the first date cell inside the sheet, with a warning.
-- LOCATION_OVERRIDES fills in details the sheet leaves out (e.g. a missing city) that a
-  coordinator has confirmed. Overrides apply only when the sheet value matches exactly.
+- Addresses are copied from the sheet exactly as written (whitespace tidied only).
+  Do not add cities, states, or other corrections in the script; any change must be
+  made in the spreadsheet itself.
 - Zoom join links, meeting IDs, passcodes, and the call-in number are NEVER
   written to the output (they are shared on request by a coordinator).
 
@@ -45,13 +46,6 @@ except ImportError:
     sys.exit("Please install openpyxl: pip install openpyxl")
 
 DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-# Confirmed additions to sheet values. Key = exact (whitespace-tidied) value in the sheet.
-# Applied only on an exact match, so if the sheet is corrected the override simply stops applying.
-LOCATION_OVERRIDES = {
-    # City confirmed by Jake Graff, 2026-10-31.
-    "580 N. Caveman Blvd.": "580 N. Caveman Blvd. American Fork, UT",
-}
-
 CITIES = ["American Fork", "Pleasant Grove", "Cedar Hills", "Highland", "Lehi", "Alpine", "Saratoga Springs"]
 
 
@@ -156,7 +150,6 @@ def main():
             # They are shared on request by a coordinator. Columns E/G/H are deliberately ignored.
             m.update({"location": "", "zoom_details": "on-request"})
         else:
-            e = LOCATION_OVERRIDES.get(e, e)
             q = e if (any(x.lower() in e.lower() for x in CITIES) or not city) else f"{e}, {city}"
             if "ut" not in q.lower().split(", ")[-1].split():
                 q += ", UT"
